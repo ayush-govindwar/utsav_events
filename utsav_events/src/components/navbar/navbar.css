@@ -1,0 +1,465 @@
+/* Logo placeholder styles remain the same */
+.navbar.scrolled .logo-placeholder {
+  color: #333;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 2rem 0;
+  background: transparent;
+  backdrop-filter: none;
+  transition: all 0.4s ease;
+  border-bottom: none;
+}
+
+.navbar.scrolled {
+  padding: 1rem 0;
+  background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Inverted Navbar Styles */
+.navbar.inverted {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Split Navbar Styles - Left dark, Right light with animation */
+.navbar.split {
+  background: linear-gradient(to right, 
+    #1a1a1a 0%, 
+    #1a1a1a 50%, 
+    #f8f8f8 50%, 
+    #f8f8f8 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  animation: splitAnimation 2s ease-in-out forwards;
+}
+
+@keyframes splitAnimation {
+  0% {
+    background: linear-gradient(to right, 
+      #f8f8f8 0%, 
+      #f8f8f8 100%, 
+      #f8f8f8 100%, 
+      #f8f8f8 100%);
+  }
+  100% {
+    background: linear-gradient(to right, 
+      #1a1a1a 0%, 
+      #1a1a1a 50%, 
+      #f8f8f8 50%, 
+      #f8f8f8 100%);
+  }
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  position: relative;
+}
+
+/* Logo Styles */
+.logo {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.logo img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.navbar.scrolled .logo-placeholder {
+  color: #333;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.inverted .logo-placeholder {
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo text color for split navbar */
+.navbar.split .logo-placeholder {
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Desktop Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  letter-spacing: 0.02em;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.navbar.scrolled .nav-link {
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.navbar.inverted .nav-link {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation links for split navbar */
+.navbar.split .nav-link {
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* OUR EVENTS - entirely white (left side) */
+.navbar.split .nav-links .nav-link:nth-child(1) {
+  color: white !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* REVIEWS - New split text styling */
+.navbar.split .reviews-link {
+  color: transparent !important;
+  position: relative;
+}
+
+.navbar.split .reviews-left {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.navbar.split .reviews-right {
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* CONTACT US - entirely dark (right side) */
+.navbar.split .nav-links .nav-link:nth-child(3) {
+  color: #333 !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.nav-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+.navbar.scrolled .nav-link:hover {
+  color: #666;
+  transform: translateY(-1px);
+}
+
+.navbar.inverted .nav-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+.navbar.split .nav-link:hover {
+  color: #666;
+  transform: translateY(-1px);
+}
+
+/* Special hover effects for split reviews */
+.navbar.split .reviews-link:hover .reviews-left {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar.split .reviews-link:hover .reviews-right {
+  color: #666;
+}
+
+.nav-link.active {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar.scrolled .nav-link.active {
+  color: #666;
+}
+
+.navbar.inverted .nav-link.active {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar.split .nav-link.active {
+  color: #666;
+}
+
+/* Special active effects for split reviews */
+.navbar.split .reviews-link.active .reviews-left {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar.split .reviews-link.active .reviews-right {
+  color: #666;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: white;
+  transition: width 0.4s ease;
+}
+
+.navbar.scrolled .nav-link::after {
+  background: #666;
+}
+
+.navbar.inverted .nav-link::after {
+  background: white;
+}
+
+.navbar.split .nav-link::after {
+  background: #666;
+}
+
+/* Special underline for split reviews */
+.navbar.split .reviews-link::after {
+  background: linear-gradient(to right, white 0%, white 50%, #666 50%, #666 100%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Language Selector */
+.language-selector {
+  display: flex;
+  align-items: center;
+}
+
+.flag-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.flag-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1001;
+  margin-left: auto;
+}
+
+.hamburger {
+  width: 28px;
+  height: 2px;
+  background: white;
+  margin: 4px 0;
+  transition: all 0.4s ease;
+  transform-origin: center;
+}
+
+.navbar.scrolled .hamburger {
+  background: #333;
+}
+
+.navbar.inverted .hamburger {
+  background: white;
+}
+
+/* Hamburger menu for split navbar */
+.navbar.split .hamburger {
+  background: #333;
+}
+
+.mobile-menu-btn .hamburger.active:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-btn .hamburger.active:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn .hamburger.active:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  transition: right 0.4s ease;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-top: 80px;
+}
+
+.mobile-menu li {
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 1.5rem 2rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  letter-spacing: 0.01em;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.mobile-menu a:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #666;
+  transform: translateX(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1.5rem 0;
+  }
+  
+  .navbar.scrolled {
+    padding: 0.75rem 0;
+  }
+  
+  .navbar.inverted {
+    padding: 0.75rem 0;
+  }
+  
+  .navbar-container {
+    padding: 0 1.5rem;
+  }
+
+  .logo {
+    padding-left: 0.5rem;
+  }
+  
+  .logo img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    margin-right: 0.5rem;
+  }
+  
+  .hamburger {
+    width: 24px;
+    height: 2px;
+    margin: 3px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 1.25rem 0;
+  }
+  
+  .navbar.scrolled {
+    padding: 0.5rem 0;
+  }
+  
+  .navbar.inverted {
+    padding: 0.5rem 0;
+  }
+  
+  .navbar-container {
+    padding: 0 1rem;
+  }
+
+  .logo {
+    padding-left: 0.25rem;
+  }
+  
+  .logo img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .mobile-menu {
+    width: 250px;
+    right: -250px;
+  }
+
+  .mobile-menu-btn {
+    margin-right: 0.25rem;
+  }
+  
+  .hamburger {
+    width: 22px;
+  }
+}

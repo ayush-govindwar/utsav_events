@@ -1,0 +1,18 @@
+.App {
+  font-family: 'Georgia', serif;
+  overflow-x: hidden;
+  background: #4B352A;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  line-height: 1.6;
+  color: #F0F2BD;
+  background: #4B352A;
+}

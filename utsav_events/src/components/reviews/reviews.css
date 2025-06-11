@@ -1,0 +1,235 @@
+/* Reviews Section - Dark Theme */
+.reviews-section {
+  background: #1a1a1a; /* Dark background */
+  padding: 80px 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reviews-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.reviews-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.reviews-title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 300;
+  color: #ffffff; /* White text on dark background */
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-style: italic;
+  text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.1);
+  margin: 0;
+}
+
+.reviews-carousel-container {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reviews-carousel {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-card {
+  position: absolute;
+  background: #ffffff; /* White capsules */
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Active card (center, largest) */
+.review-card.active {
+  width: 600px;
+  max-width: 85vw;
+  transform: translateX(0) scale(1);
+  z-index: 3;
+  opacity: 1;
+}
+
+/* Left card */
+.review-card.left {
+  width: 500px;
+  max-width: 70vw;
+  transform: translateX(-75%) scale(0.9);
+  z-index: 2;
+  opacity: 0.6;
+}
+
+/* Right card */
+.review-card.right {
+  width: 500px;
+  max-width: 70vw;
+  transform: translateX(75%) scale(0.9);
+  z-index: 2;
+  opacity: 0.6;
+}
+
+/* Hidden cards */
+.review-card.hidden {
+  opacity: 0;
+  transform: scale(0.7);
+  z-index: 1;
+}
+
+.review-content {
+  text-align: center;
+  color: #333; /* Dark text on white background */
+}
+
+.review-rating {
+  margin-bottom: 20px;
+}
+
+.star {
+  font-size: 24px;
+  color: #ddd;
+  margin: 0 2px;
+  transition: color 0.3s ease;
+}
+
+.star.filled {
+  color: #ffd700; /* Gold stars */
+}
+
+.review-text {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  color: #444;
+  font-style: italic;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.review-author {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.reviewer-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+/* Carousel indicators */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #ffffff;
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .reviews-section {
+    padding: 60px 0;
+  }
+  
+  .reviews-carousel-container {
+    height: 500px;
+  }
+  
+  .reviews-carousel {
+    height: 400px;
+  }
+  
+  .review-card.active {
+    width: 450px;
+    padding: 35px;
+  }
+  
+  .review-card.left,
+  .review-card.right {
+    width: 350px;
+    padding: 30px;
+    transform: translateX(-80%) scale(0.85);
+  }
+  
+  .review-card.right {
+    transform: translateX(80%) scale(0.85);
+  }
+  
+  .review-text {
+    font-size: 16px;
+    min-height: 80px;
+  }
+  
+  .reviewer-name {
+    font-size: 16px;
+  }
+  
+  .star {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .review-card.left {
+    transform: translateX(-85%) scale(0.8);
+  }
+  
+  .review-card.right {
+    transform: translateX(85%) scale(0.8);
+  }
+  
+  .review-card.active {
+    width: 350px;
+    padding: 30px;
+  }
+  
+  .review-text {
+    min-height: 70px;
+    font-size: 15px;
+  }
+}

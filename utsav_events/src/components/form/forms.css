@@ -1,0 +1,231 @@
+/* Forms Section - Light Theme */
+.forms-section {
+  background: #f8f9fa; /* Light background */
+  padding: 100px 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forms-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.forms-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.forms-title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 300;
+  color: #333;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-style: italic;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 0 15px 0;
+}
+
+.forms-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 300;
+  margin: 0;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.contact-form {
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #333;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #333;
+  box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 20px;
+  padding-right: 50px;
+}
+
+.form-select option {
+  padding: 10px;
+  color: #333;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.form-submit-btn {
+  width: 100%;
+  padding: 18px 30px;
+  background: #333;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+  margin-top: 20px;
+}
+
+.form-submit-btn:hover {
+  background: #222;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(51, 51, 51, 0.3);
+}
+
+.form-submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 20px;
+  border: 1px solid #c3e6cb;
+  font-weight: 500;
+}
+
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 20px;
+  border: 1px solid #f5c6cb;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .forms-section {
+    padding: 80px 0;
+  }
+  
+  .forms-container {
+    padding: 0 15px;
+  }
+  
+  .contact-form {
+    padding: 40px 30px;
+    margin: 0 10px;
+  }
+  
+  .forms-header {
+    margin-bottom: 40px;
+  }
+  
+  .form-group {
+    margin-bottom: 25px;
+  }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 12px 15px;
+    font-size: 15px;
+  }
+  
+  .form-submit-btn {
+    padding: 15px 25px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 30px 20px;
+    margin: 0 5px;
+  }
+  
+  .forms-title {
+    font-size: 2.5rem;
+  }
+  
+  .forms-subtitle {
+    font-size: 1rem;
+  }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .form-textarea {
+    min-height: 100px;
+  }
+}
