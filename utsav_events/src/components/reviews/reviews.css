@@ -47,6 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: pan-y; /* Allow vertical scrolling but handle horizontal touch ourselves */
 }
 
 .review-card {
@@ -62,6 +63,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  user-select: none; /* Prevent text selection during swipe */
 }
 
 /* Active card (center, largest) */
@@ -80,6 +82,7 @@
   transform: translateX(-75%) scale(0.9);
   z-index: 2;
   opacity: 0.6;
+  cursor: pointer;
 }
 
 /* Right card */
@@ -89,6 +92,7 @@
   transform: translateX(75%) scale(0.9);
   z-index: 2;
   opacity: 0.6;
+  cursor: pointer;
 }
 
 /* Hidden cards */
@@ -98,9 +102,40 @@
   z-index: 1;
 }
 
+/* Hover effects for desktop */
+@media (hover: hover) {
+  .review-card.left:hover,
+  .review-card.right:hover {
+    opacity: 0.8;
+    transform: translateX(-75%) scale(0.95);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  }
+  
+  .review-card.right:hover {
+    transform: translateX(75%) scale(0.95);
+  }
+  
+  .indicator:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+  }
+}
+
+/* Active state for touch devices */
+.review-card.left:active,
+.review-card.right:active {
+  opacity: 0.9;
+  transform: translateX(-75%) scale(0.92);
+}
+
+.review-card.right:active {
+  transform: translateX(75%) scale(0.92);
+}
+
 .review-content {
   text-align: center;
   color: #333; /* Dark text on white background */
+  pointer-events: none; /* Prevent interference with card click events */
 }
 
 .review-rating {
@@ -170,6 +205,12 @@
   background: rgba(255, 255, 255, 0.6);
 }
 
+/* Visual feedback for touch interactions */
+.indicator:active {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.8);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .reviews-section {
@@ -231,5 +272,11 @@
   .review-text {
     min-height: 70px;
     font-size: 15px;
+  }
+  
+  /* Make touch targets larger on mobile */
+  .indicator {
+    width: 14px;
+    height: 14px;
   }
 }

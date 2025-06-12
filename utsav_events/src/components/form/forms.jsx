@@ -58,15 +58,32 @@ const Forms = () => {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('http://localhost:8000/api/submit-inquiry/', {
+      // Transform the data to match backend expectations
+      const requestData = {
+        full_name: formData.name.trim(),
+        phone_number: formData.phoneNumber.trim(),
+        event_type: formData.eventType,
+        budget_range: formData.priceRange,
+        additional_details: formData.description.trim()
+      };
+
+      console.log('Sending data:', requestData); // Debug log
+      console.log('Original form data:', formData); // Debug log
+
+      const response = await fetch('http://127.0.0.1:8000/api/submit-inquiry/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(requestData)
       });
 
+      console.log('Response status:', response.status); // Debug log
+      console.log('Response headers:', Object.fromEntries(response.headers.entries())); // Debug log
+      
       if (response.ok) {
+        const responseData = await response.json();
+        console.log('Success response:', responseData); // Debug log
         setSubmitStatus('success');
         setFormData({
           name: '',
@@ -76,10 +93,22 @@ const Forms = () => {
           description: ''
         });
       } else {
+        // Try to get error details from response
+        const responseText = await response.text();
+        console.error('Error response status:', response.status);
+        console.error('Error response text:', responseText);
+        
+        try {
+          const errorData = JSON.parse(responseText);
+          console.error('Parsed error data:', errorData);
+        } catch (parseError) {
+          console.error('Could not parse error response as JSON');
+        }
+        
         setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Network error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

@@ -85,83 +85,106 @@ const Hero = () => {
     }
   };
 
-  // Animation variants
-  const backgroundVariants = {
-    enter: (direction) => ({
-      opacity: 0,
-      scale: 1.1,
-      x: direction > 0 ? '100%' : '-100%'
-    }),
-    center: {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      transition: {
-        duration: 1.5,
+const backgroundVariants = {
+  enter: {
+    scale: 1.1,
+    opacity: 1,
+    clipPath: "circle(0% at 50% 50%)" // Start with no visible area
+  },
+  center: {
+    scale: 1,
+    opacity: 1,
+    clipPath: "circle(100% at 50% 50%)", // Expand to full circle
+    transition: {
+      clipPath: {
+        duration: 1.0,
+        delay: 0,
         ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    },
-    exit: (direction) => ({
-      opacity: 0,
-      scale: 0.9,
-      x: direction < 0 ? '100%' : '-100%',
-      transition: {
-        duration: 1.5,
+      },
+      scale: {
+        duration: 1.2,
+        delay: 0,
         ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    })
-  };
-
-  const textVariants = {
-    hidden: {
-      opacity: 0,
-      y: 60,
-      scale: 0.9
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        delay: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    },
-    exit: {
-      opacity: 0,
-      y: -30,
-      scale: 1.1,
-      transition: {
-        duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99]
+      },
+      opacity: {
+        duration: 0.3,
+        delay: 0,
+        ease: "easeOut"
       }
     }
-  };
-
-  const secondaryTextVariants = {
-    hidden: {
-      opacity: 0,
-      x: 100
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.8,
-        delay: 0.6,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    },
-    exit: {
-      opacity: 0,
-      x: -50,
-      transition: {
+  },
+  exit: {
+    scale: 0.9,
+    opacity: 0,
+    clipPath: "circle(0% at 50% 50%)", // Shrink back to center
+    transition: {
+      clipPath: {
         duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: [0.25, 0.46, 0.45, 0.94]
+      },
+      scale: {
+        duration: 0.5,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      },
+      opacity: {
+        duration: 0.3,
+        ease: "easeIn"
       }
     }
-  };
+  }
+};
+
+// Keep your text variants the same for perfect sync
+const textVariants = {
+  hidden: {
+    opacity: 0,
+    y: 60,
+    scale: 0.9
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      delay: 0.2, // Starts just after background begins revealing
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -30,
+    scale: 1.1,
+    transition: {
+      duration: 0.4,
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  }
+};
+
+const secondaryTextVariants = {
+  hidden: {
+    opacity: 0,
+    x: 100
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      delay: 0.4, // Appears as circle is nearly fully revealed
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  },
+  exit: {
+    opacity: 0,
+    x: -50,
+    transition: {
+      duration: 0.4,
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  }
+};
 
   // Parallax calculations
   const backgroundTransform = `translateY(${scrollY * 0.3}px)`;
@@ -184,24 +207,29 @@ const Hero = () => {
       {/* Hero Section */}
       <section className="hero-section">
         <div 
-          className="hero-background"
-          style={{ transform: backgroundTransform }}
+        className="hero-background"
+        style={{ transform: backgroundTransform }}
         >
-          <AnimatePresence mode="wait" custom={direction}>
+        <AnimatePresence mode="wait" custom={direction}>
             <motion.div
-              key={currentSlide}
-              custom={direction}
-              variants={backgroundVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className="hero-slide-bg"
-              style={{
-                backgroundImage: `url(${slides[currentSlide].image})`
-              }}
+            key={currentSlide}
+            custom={direction}
+            variants={backgroundVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="hero-slide-bg"
+            style={{
+                backgroundImage: `url(${slides[currentSlide].image})`,
+                // Ensure the background is properly positioned for the circle effect
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                // Add a slight transform-origin for better circle reveal
+                transformOrigin: 'center center'
+            }}
             />
-          </AnimatePresence>
-          <div className="hero-overlay"></div>
+        </AnimatePresence>
+        <div className="hero-overlay"></div>
         </div>
 
         {/* <nav className={`hero-nav ${scrollY > 100 ? 'scrolled' : ''}`}>

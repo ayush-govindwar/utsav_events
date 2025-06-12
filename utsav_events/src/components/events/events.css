@@ -201,6 +201,17 @@
   scrollbar-color: #333 #f0f0f0;
 }
 
+.see-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  padding-left:3px;
+}
+
+.see-more-btn {
+  max-width: 150px; /* Optional: limit button width */
+}
+
 
 /* Responsive Design */
 @media (max-width: 1200px) {

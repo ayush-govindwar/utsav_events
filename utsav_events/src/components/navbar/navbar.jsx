@@ -25,16 +25,10 @@ const Navbar = () => {
     setMobileMenuOpen(false);
   };
 
-  // Calculate navbar states based on scroll position
-  const shouldInvert = scrollY > window.innerHeight * 3 && scrollY <= window.innerHeight * 4;
-  const shouldSplit = scrollY > window.innerHeight * 5;
-  
-  // Determine navbar classes
+  // Determine navbar classes - simplified without inverted and split
   const getNavbarClasses = () => {
     let classes = 'navbar';
     if (scrollY > 690) classes += ' scrolled';
-    if (shouldInvert) classes += ' inverted';
-    if (shouldSplit) classes += ' split';
     return classes;
   };
 
@@ -47,7 +41,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="nav-links">
-        <Link 
+          <Link 
             to="events-section" 
             smooth={true} 
             offset={0} 
@@ -56,29 +50,22 @@ const Navbar = () => {
             activeClass="active"
             spy={true}
             data-text="OUR EVENTS" 
-        >
+          >
             OUR EVENTS
-        </Link>
-        <Link 
+          </Link>
+          <Link 
             to="reviews-section" 
             smooth={true} 
             offset={0} 
             duration={500} 
-            className="nav-link reviews-link"
+            className="nav-link"
             activeClass="active"
             spy={true}
             data-text="REVIEWS" 
-        >
-            {shouldSplit ? (
-              <>
-                <span className="reviews-left">REVI</span>
-                <span className="reviews-right">EWS</span>
-              </>
-            ) : (
-              "REVIEWS"
-            )}
-        </Link>
-        <Link 
+          >
+            REVIEWS
+          </Link>
+          <Link 
             to="forms-section" 
             smooth={true} 
             offset={0} 
@@ -87,9 +74,9 @@ const Navbar = () => {
             activeClass="active"
             spy={true}
             data-text="CONTACT US" 
-        >
+          >
             CONTACT US
-        </Link>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}

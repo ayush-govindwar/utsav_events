@@ -4,7 +4,7 @@ import './events.css';
 
 const Events = () => {
   const containerRef = useRef(null);
-  
+ 
   // Sample events data
   const events = [
     {
@@ -53,10 +53,15 @@ const Events = () => {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const titleY = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
 
+  const handleSeeMoreClick = () => {
+    // Replace with your actual Google Drive link
+    window.open('https://drive.google.com/drive/folders/dummy-folder-id', '_blank');
+  };
+
   return (
     <div className="events-section" ref={containerRef}>
       <div className="events-container">
-        <motion.div 
+        <motion.div
           className="events-header"
           style={{ opacity: titleOpacity, y: titleY }}
         >
@@ -65,9 +70,9 @@ const Events = () => {
             <span className="scroll-hint-text">← Scroll horizontally to view more events →</span>
           </div>
         </motion.div>
-        
+       
         <div className="events-scroll-container">
-          <motion.div 
+          <motion.div
             className="events-grid"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -83,8 +88,8 @@ const Events = () => {
                 whileHover={{ y: -10 }}
               >
                 <div className="event-image-container">
-                  <img 
-                    src={event.image} 
+                  <img
+                    src={event.image}
                     alt={event.title}
                     className="event-image"
                   />
@@ -98,6 +103,22 @@ const Events = () => {
             ))}
           </motion.div>
         </div>
+
+        {/* See More Button */}
+        <motion.div
+          className="see-more-container"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <button 
+            className="form-submit-btn see-more-btn"
+            onClick={handleSeeMoreClick}
+            style={{ textAlign: 'center' }}
+          >
+            Gallery →
+          </button>
+        </motion.div>
       </div>
     </div>
   );

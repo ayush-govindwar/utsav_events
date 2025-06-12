@@ -5,6 +5,11 @@ import './reviews.css';
 const Reviews = () => {
   const containerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoScrollActive, setIsAutoScrollActive] = useState(true);
+  
+  // Touch/swipe handling
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
   
   // Sample reviews data
   const reviews = [
@@ -48,12 +53,14 @@ const Reviews = () => {
 
   // Auto-scroll functionality
   useEffect(() => {
+    if (!isAutoScrollActive) return;
+    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % reviews.length);
     }, 4000); // Change every 4 seconds
 
     return () => clearInterval(interval);
-  }, [reviews.length]);
+  }, [reviews.length, isAutoScrollActive]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -62,6 +69,67 @@ const Reviews = () => {
 
   const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const titleY = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
+
+  // Navigation functions
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % reviews.length);
+    pauseAutoScroll();
+  };
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+    pauseAutoScroll();
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+    pauseAutoScroll();
+  };
+
+  const pauseAutoScroll = () => {
+    setIsAutoScrollActive(false);
+    setTimeout(() => setIsAutoScrollActive(true), 8000); // Resume after 8 seconds
+  };
+
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrevious();
+    }
+  };
+
+  // Click handlers for desktop
+  const handleCardClick = (index) => {
+    if (index === currentIndex) return; // Don't do anything if clicking active card
+    
+    const leftIndex = (currentIndex - 1 + reviews.length) % reviews.length;
+    const rightIndex = (currentIndex + 1) % reviews.length;
+    
+    if (index === leftIndex) {
+      goToPrevious();
+    } else if (index === rightIndex) {
+      goToNext();
+    } else {
+      goToSlide(index);
+    }
+  };
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
@@ -82,7 +150,7 @@ const Reviews = () => {
   };
 
   return (
-    <div className="reviews-section" ref={containerRef}>
+    <div className="reviews-section" id="reviews-section" ref={containerRef}>
       <div className="reviews-container">
         <motion.div 
           className="reviews-header"
@@ -97,6 +165,9 @@ const Reviews = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             {reviews.map((review, index) => (
               <motion.div
@@ -105,6 +176,8 @@ const Reviews = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                onClick={() => handleCardClick(index)}
+                style={{ cursor: index !== currentIndex ? 'pointer' : 'default' }}
               >
                 <div className="review-content">
                   <div className="review-rating">
@@ -125,7 +198,7 @@ const Reviews = () => {
               <button
                 key={index}
                 className={`indicator ${index === currentIndex ? 'active' : ''}`}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => goToSlide(index)}
               />
             ))}
           </div>

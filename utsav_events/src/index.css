@@ -5,6 +5,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* body {
+  zoom: 0.8;
+} */
 
 :root {
   --deep-earth-brown: #4B352A;
