@@ -487,10 +487,13 @@ html {
   
   .hero-content {
     padding: 0 25px;
+    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 100px;
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
   }
   
   .hero-main {
@@ -583,10 +586,14 @@ html {
   }
   
   .hero-content {
-    padding: 80px 20px 0;
+    padding: 0 20px;
+    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
   }
   
   .hero-main {
