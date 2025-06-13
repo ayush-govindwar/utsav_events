@@ -27,13 +27,14 @@ const Forms = () => {
     'Other'
   ];
 
+  // Updated price ranges to match backend expectations
   const priceRanges = [
-    '$1,000 - $5,000',
-    '$5,000 - $10,000',
-    '$10,000 - $25,000',
-    '$25,000 - $50,000',
-    '$50,000 - $100,000',
-    'Above $100,000'
+    { label: '$1,000 - $5,000', value: '1-5 th' },
+    { label: '$5,000 - $10,000', value: '5-10 th' },
+    { label: '$10,000 - $25,000', value: '10-25 th' },
+    { label: '$25,000 - $50,000', value: '25-50 th' },
+    { label: '$50,000 - $100,000', value: '50-100 th' },
+    { label: 'Above $100,000', value: '100+ th' }
   ];
 
   const { scrollYProgress } = useScroll({
@@ -58,13 +59,15 @@ const Forms = () => {
     setSubmitStatus(null);
 
     try {
-      // Transform the data to match backend expectations
+      // Transform the data to match backend expectations exactly
       const requestData = {
         full_name: formData.name.trim(),
         phone_number: formData.phoneNumber.trim(),
         event_type: formData.eventType,
-        budget_range: formData.priceRange,
-        additional_details: formData.description.trim()
+        // Only include budget_range if it's selected (now optional)
+        ...(formData.priceRange && { budget_range: formData.priceRange }),
+        // Only include additional_details if it has content
+        ...(formData.description.trim() && { additional_details: formData.description.trim() })
       };
 
       console.log('Sending data:', requestData); // Debug log
@@ -79,7 +82,6 @@ const Forms = () => {
       });
 
       console.log('Response status:', response.status); // Debug log
-      console.log('Response headers:', Object.fromEntries(response.headers.entries())); // Debug log
       
       if (response.ok) {
         const responseData = await response.json();
@@ -179,18 +181,17 @@ const Forms = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="priceRange" className="form-label">Budget Range *</label>
+              <label htmlFor="priceRange" className="form-label">Budget Range (Optional)</label>
               <select
                 id="priceRange"
                 name="priceRange"
                 value={formData.priceRange}
                 onChange={handleInputChange}
                 className="form-select"
-                required
               >
-                <option value="">Select budget range</option>
+                <option value="">Select budget range (optional)</option>
                 {priceRanges.map((range, index) => (
-                  <option key={index} value={range}>{range}</option>
+                  <option key={index} value={range.value}>{range.label}</option>
                 ))}
               </select>
             </div>
