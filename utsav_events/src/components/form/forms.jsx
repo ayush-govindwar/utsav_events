@@ -28,14 +28,15 @@ const Forms = () => {
   ];
 
   // Updated price ranges to match backend expectations
-  const priceRanges = [
-    { label: '$1,000 - $5,000', value: '1-5 th' },
-    { label: '$5,000 - $10,000', value: '5-10 th' },
-    { label: '$10,000 - $25,000', value: '10-25 th' },
-    { label: '$25,000 - $50,000', value: '25-50 th' },
-    { label: '$50,000 - $100,000', value: '50-100 th' },
-    { label: 'Above $100,000', value: '100+ th' }
-  ];
+const priceRanges = [
+  { label: '₹1,000 - ₹5,000', value: '1-5 k' },
+  { label: '₹5,000 - ₹10,000', value: '5-10 k' },
+  { label: '₹10,000 - ₹25,000', value: '10-25 k' },
+  { label: '₹25,000 - ₹50,000', value: '25-50 k' },
+  { label: '₹50,000 - ₹1,00,000', value: '50-100 k' },
+  { label: 'Above ₹1,00,000', value: '100+ k' }
+];
+
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
