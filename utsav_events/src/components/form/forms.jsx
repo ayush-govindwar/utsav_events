@@ -86,7 +86,10 @@ const Forms = () => {
       if (response.ok) {
         const responseData = await response.json();
         console.log('Success response:', responseData); // Debug log
+        
         setSubmitStatus('success');
+        
+        // Clear the form
         setFormData({
           name: '',
           phoneNumber: '',
@@ -94,6 +97,17 @@ const Forms = () => {
           priceRange: '',
           description: ''
         });
+
+        // Redirect to WhatsApp with pre-filled message
+        if (responseData.whatsapp_url) {
+          console.log('WhatsApp URL:', responseData.whatsapp_url); // Debug log
+          
+          // Show success message briefly before redirecting
+          setTimeout(() => {
+            window.open(responseData.whatsapp_url, '_blank');
+          }, 1500); // 1.5 second delay to show success message
+        }
+        
       } else {
         // Try to get error details from response
         const responseText = await response.text();
@@ -216,7 +230,7 @@ const Forms = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              {isSubmitting ? 'Submitting...' : 'Send Message'}
+              {isSubmitting ? 'Submitting...' : 'Send via WhatsApp'}
             </motion.button>
 
             {submitStatus === 'success' && (
@@ -225,7 +239,13 @@ const Forms = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                Thank you! We'll get back to you soon.
+                <div className="success-content">
+                  <div className="success-icon">✅</div>
+                  <div className="success-text">
+                    <h4>Form submitted successfully!</h4>
+                    <p>Redirecting you to WhatsApp...</p>
+                  </div>
+                </div>
               </motion.div>
             )}
 
@@ -235,7 +255,13 @@ const Forms = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                Something went wrong. Please try again.
+                <div className="error-content">
+                  <div className="error-icon">❌</div>
+                  <div className="error-text">
+                    <h4>Something went wrong!</h4>
+                    <p>Please try again or contact us directly.</p>
+                  </div>
+                </div>
               </motion.div>
             )}
           </form>

@@ -168,6 +168,58 @@
   font-weight: 500;
 }
 
+.error-message {
+  margin-top: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%);
+  border: 1px solid #f1aeb5;
+  border-radius: 12px;
+  color: #721c24;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.error-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.error-text h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.error-text p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Button text update */
+.form-submit-btn {
+  /* Your existing button styles */
+  transition: all 0.3s ease;
+}
+
+.form-submit-btn:hover {
+  /* Your existing hover styles */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading state for button */
+.form-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .forms-section {
@@ -201,6 +253,28 @@
   .form-submit-btn {
     padding: 15px 25px;
     font-size: 16px;
+  }
+
+  .success-content,
+  .error-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .success-icon,
+  .error-icon {
+    font-size: 20px;
+  }
+  
+  .success-text h4,
+  .error-text h4 {
+    font-size: 15px;
+  }
+  
+  .success-text p,
+  .error-text p {
+    font-size: 13px;
   }
 }
 
