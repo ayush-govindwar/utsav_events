@@ -7,6 +7,7 @@ const Forms = () => {
   const [formData, setFormData] = useState({
     name: '',
     phoneNumber: '',
+    email: '', // Added email field
     eventType: '',
     priceRange: '',
     description: ''
@@ -27,16 +28,15 @@ const Forms = () => {
     'Other'
   ];
 
-  // Updated price ranges to match backend expectations
-const priceRanges = [
-  { label: '₹1,000 - ₹5,000', value: '1-5 k' },
-  { label: '₹5,000 - ₹10,000', value: '5-10 k' },
-  { label: '₹10,000 - ₹25,000', value: '10-25 k' },
-  { label: '₹25,000 - ₹50,000', value: '25-50 k' },
-  { label: '₹50,000 - ₹1,00,000', value: '50-100 k' },
-  { label: 'Above ₹1,00,000', value: '100+ k' }
-];
-
+  // Updated price ranges to match backend expectations (th = thousands)
+  const priceRanges = [
+    { label: '₹1,000 - ₹5,000', value: '1-5 th' },
+    { label: '₹5,000 - ₹10,000', value: '5-10 th' },
+    { label: '₹10,000 - ₹25,000', value: '10-25 th' },
+    { label: '₹25,000 - ₹50,000', value: '25-50 th' },
+    { label: '₹50,000 - ₹1,00,000', value: '50-100 th' },
+    { label: 'Above ₹1,00,000', value: '100+ th' }
+  ];
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -64,6 +64,8 @@ const priceRanges = [
       const requestData = {
         full_name: formData.name.trim(),
         phone_number: formData.phoneNumber.trim(),
+        // Only include email if it's provided and not empty
+        ...(formData.email.trim() && { email: formData.email.trim() }),
         event_type: formData.eventType,
         // Only include budget_range if it's selected (now optional)
         ...(formData.priceRange && { budget_range: formData.priceRange }),
@@ -74,7 +76,7 @@ const priceRanges = [
       console.log('Sending data:', requestData); // Debug log
       console.log('Original form data:', formData); // Debug log
 
-      const response = await fetch('https://utsav-events-backend1.onrender.com/api/submit-inquiry/', {
+      const response = await fetch('http://127.0.0.1:8000/api/submit-inquiry/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,6 +96,7 @@ const priceRanges = [
         setFormData({
           name: '',
           phoneNumber: '',
+          email: '',
           eventType: '',
           priceRange: '',
           description: ''
@@ -179,6 +182,22 @@ const priceRanges = [
             </div>
 
             <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                Email Address 
+                <span className="optional-label">(Optional)</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="form-input"
+                placeholder="Enter your email address"
+              />
+            </div>
+
+            <div className="form-group">
               <label htmlFor="eventType" className="form-label">Event Type *</label>
               <select
                 id="eventType"
@@ -196,7 +215,10 @@ const priceRanges = [
             </div>
 
             <div className="form-group">
-              <label htmlFor="priceRange" className="form-label">Budget Range (Optional)</label>
+              <label htmlFor="priceRange" className="form-label">
+                Budget Range 
+                <span className="optional-label">(Optional)</span>
+              </label>
               <select
                 id="priceRange"
                 name="priceRange"
@@ -212,7 +234,10 @@ const priceRanges = [
             </div>
 
             <div className="form-group">
-              <label htmlFor="description" className="form-label">Additional Details (Optional)</label>
+              <label htmlFor="description" className="form-label">
+                Additional Details 
+                <span className="optional-label">(Optional)</span>
+              </label>
               <textarea
                 id="description"
                 name="description"
@@ -244,7 +269,7 @@ const priceRanges = [
                   <div className="success-icon">✅</div>
                   <div className="success-text">
                     <h4>Form submitted successfully!</h4>
-                    <p>Redirecting you to WhatsApp...</p>
+                    <p>We've sent you a confirmation email and are redirecting you to WhatsApp...</p>
                   </div>
                 </div>
               </motion.div>
