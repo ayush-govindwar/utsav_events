@@ -54,8 +54,7 @@ const Events = () => {
   const titleY = useTransform(scrollYProgress, [0, 0.3], [50, 0]);
 
   const handleSeeMoreClick = () => {
-    // Replace with your actual Google Drive link
-    window.open('https://drive.google.com/drive/folders/dummy-folder-id', '_blank');
+    window.open('https://drive.google.com/drive/folders/16gU8yBj9vL4kYu8GXoSnwzrv8Ivq94yh', '_blank');
   };
 
   return (

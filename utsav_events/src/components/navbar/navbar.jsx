@@ -3,6 +3,7 @@ import { Link } from 'react-scroll';
 import './navbar.css';
 
 import logoImage from '../../assets/logo.png'; 
+import { useAnimate } from 'framer-motion';
 
 const Navbar = () => {
   const [scrollY, setScrollY] = useState(0);
